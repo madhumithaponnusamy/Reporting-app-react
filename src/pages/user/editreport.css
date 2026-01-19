@@ -1,0 +1,115 @@
+/* Page background */
+.report-container {
+  min-height: 100vh;
+  background: #f4f6f8;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* Card */
+.report-card {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  padding: 28px 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.report-card h2 {
+  margin-bottom: 22px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Form */
+.report-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Inputs & Select */
+.report-card select,
+.report-card textarea,
+.report-card input[type="text"],
+.report-card input[type="file"] {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+
+/* Textarea */
+.report-card textarea {
+  resize: vertical;
+}
+
+/* Focus */
+.report-card select:focus,
+.report-card textarea:focus,
+.report-card input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* File input */
+.report-card input[type="file"] {
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Submit button */
+.submit-btn {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+
+  background-color: #ffffff;   
+  color: #111827;              
+
+  font-size: 14px;
+}
+
+.location-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    margin: 10px 0;
+    background-color: #4caf50; /* Green color */
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

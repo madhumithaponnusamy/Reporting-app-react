@@ -1,0 +1,47 @@
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login {
+    
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.login form {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 370px;
+}
+
+.login input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.login button {
+    width: 100%;
+    padding: 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+p{
+    color: black;
+    text-align: center;
+}
