@@ -10,4 +10,7 @@ export default defineConfig({
       },
     }),
   ],
+  preview: {
+    allowedHosts: ['reporting-app-react-production.up.railway.app']
+  }
 })
