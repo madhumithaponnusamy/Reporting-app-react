@@ -10,11 +10,10 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "dist")));
 
-
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Frontend running on port ${PORT}`);
 });
