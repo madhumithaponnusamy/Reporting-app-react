@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./userDashboard.css"
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function ReportIssue() {
   const [data, setData] = useState({
     category: "",
@@ -34,7 +36,7 @@ export default function ReportIssue() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/user/categories", {
+        const res = await fetch(`${BASE_URL}/api/user/categories`, {
           headers: { Authorization: `Bearer ${user_token}` },
         });
         const result = await res.json();
@@ -70,7 +72,7 @@ export default function ReportIssue() {
     formData.append("image", data.image);
 
     try {
-      const res = await fetch("http://localhost:5000/api/issue", {
+      const res = await fetch(`${BASE_URL}/api/issue`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${user_token}`,
@@ -97,7 +99,7 @@ export default function ReportIssue() {
   // Fetch districts
   useEffect(() => {
     const fetchDistricts = async () => {
-      const res = await fetch("http://localhost:5000/api/user/districts", {
+      const res = await fetch(`${BASE_URL}/api/user/districts`, {
         headers: { Authorization: `Bearer ${user_token}` },
       });
       const result = await res.json();
@@ -111,7 +113,7 @@ export default function ReportIssue() {
     if (!data.district) return;
     const fetchAreas = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/user/areas?districtId=${data.district}`,
+        `${BASE_URL}/api/user/areas?districtId=${data.district}`,
         { headers: { Authorization: `Bearer ${user_token}` } }
       );
       const result = await res.json();
