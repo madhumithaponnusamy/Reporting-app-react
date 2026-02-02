@@ -28,6 +28,7 @@ export default function UserLogin() {
           password,
           role: "user",
         }),
+         credentials: "include"
       });
 
       const result = await res.json();
