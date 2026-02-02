@@ -31,7 +31,7 @@ function MyReports() {
     }
   };
 
-  //  Delete report
+
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this report?")) return;
 
@@ -57,7 +57,7 @@ function MyReports() {
 
   const navigate = useNavigate();
 
-  //  Edit report
+ 
   const handleEdit = (id) => {
     navigate(`/edit-report/${id}`);
   };
@@ -71,7 +71,7 @@ function MyReports() {
       ) : (
         reports.map((report) => (
           <div key={report.issueId} className="report-card">
-            {/* Header */}
+          
             <div className="report-header">
               <h4>{report.categoryName}</h4>
 
@@ -89,7 +89,7 @@ function MyReports() {
 
             {report.image && (
               <img
-                src={`${BASE_URL}uploads/${report.image}`}
+                src={`${BASE_URL}/uploads/${report.image}`}
                 alt="issue"
               />
             )}
