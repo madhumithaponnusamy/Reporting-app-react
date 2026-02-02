@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./myreports.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 function MyReports() {
   const [reports, setReports] = useState([]);
   const user_token = localStorage.getItem("user_token");
@@ -16,7 +18,7 @@ function MyReports() {
   const fetchReports = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/myreport",
+        `${BASE_URL}/api/myreport`,
         {
           headers: {
             Authorization: `Bearer ${user_token}`,
@@ -35,7 +37,7 @@ function MyReports() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/issues/${id}`,
+        `${BASE_URL}/api/issues/${id}`,
         {
           headers: {
             Authorization: `Bearer ${user_token}`,
@@ -87,7 +89,7 @@ function MyReports() {
 
             {report.image && (
               <img
-                src={`http://localhost:5000/uploads/${report.image}`}
+                src={`${BASE_URL}uploads/${report.image}`}
                 alt="issue"
               />
             )}
