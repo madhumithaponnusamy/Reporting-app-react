@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function EditCategory() {
   const [categories, setCategories] = useState([]);
   
@@ -8,7 +10,7 @@ export default function EditCategory() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/user/categories", {
+    fetch(`${BASE_URL}/api/user/categories`, {
       headers: {
         Authorization: `Bearer ${admin_token}`,
       },
@@ -19,7 +21,7 @@ export default function EditCategory() {
 
   const handleUpdate = async (id, newName) => {
     const res = await fetch(
-      `http://localhost:5000/api/admin/categories/${id}`,
+      `${BASE_URL}/api/admin/categories/${id}`,
       {
         method: "PUT",
         headers: {
@@ -39,7 +41,7 @@ export default function EditCategory() {
     if (!window.confirm("Are you sure want to delete?")) return;
 
     const res = await fetch(
-      `http://localhost:5000/api/admin/categories/${id}`,
+     `${BASE_URL}/api/admin/categories/${id}`,
       {
         method: "DELETE",
         headers: {
