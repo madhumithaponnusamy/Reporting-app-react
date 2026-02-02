@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function AddCategory() {
   const [categoryName, setCategoryName] = useState("");
   const navigate = useNavigate();
@@ -10,7 +12,7 @@ export default function AddCategory() {
 
     const token = localStorage.getItem("user_token");
 
-    const res = await fetch("http://localhost:5000/api/admin/categories", {
+    const res = await fetch(`${BASE_URL}/api/admin/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
