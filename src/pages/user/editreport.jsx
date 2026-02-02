@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./editreport.css";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 function EditReport() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -29,8 +31,8 @@ function EditReport() {
         const fetchDropdowns = async () => {
             try {
                 const [catRes, distRes] = await Promise.all([
-                    axios.get("http://localhost:5000/api/user/categories", { headers: { Authorization: `Bearer ${user_token}` } }),
-                    axios.get("http://localhost:5000/api/user/districts", { headers: { Authorization: `Bearer ${user_token}` } }),
+                    axios.get(`${BASE_URL}/api/user/categories`, { headers: { Authorization: `Bearer ${user_token}` } }),
+                    axios.get(`${BASE_URL}/api/user/districts`, { headers: { Authorization: `Bearer ${user_token}` } }),
                 ]);
                 setCategories(catRes.data);
                 setDistricts(distRes.data);
@@ -47,7 +49,7 @@ function EditReport() {
 
         const fetchIssue = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/issues/${id}`, {
+                const res = await axios.get(`${BASE_URL}/api/issues/${id}`, {
                     headers: { Authorization: `Bearer ${user_token}` },
                 });
 
@@ -67,7 +69,7 @@ function EditReport() {
                 // Prefill areas for the current district
                 if (issue.districtId) {
                     const areasRes = await axios.get(
-                        `http://localhost:5000/api/user/areas?districtId=${issue.districtId}`,
+                        `${BASE_URL}/api/user/areas?districtId=${issue.districtId}`,
                         { headers: { Authorization: `Bearer ${user_token}` } }
                     );
                     setAreas(areasRes.data);
@@ -87,7 +89,7 @@ function EditReport() {
         const fetchAreas = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5000/api/user/areas?districtId=${formData.districtId}`,
+                   `${BASE_URL}/api/user/areas?districtId=${formData.districtId}`,
                     { headers: { Authorization: `Bearer ${user_token}` } }
                 );
                 setAreas(res.data);
@@ -148,7 +150,7 @@ function EditReport() {
         if (formData.image) data.append("image", formData.image);
 
         try {
-            await axios.put(`http://localhost:5000/api/issues/${id}`, data, {
+            await axios.put(`${BASE_URL}/api/issues/${id}`, data, {
                 headers: { Authorization: `Bearer ${user_token}` },
             });
             alert("Issue updated successfully");
@@ -235,7 +237,7 @@ function EditReport() {
                     ) : formData.existingImage ? (
                         <div>
                             <p>Existing image:</p>
-                            <img src={`http://localhost:5000/uploads/${formData.existingImage}`} alt="Existing" width="120" />
+                            <img src={`${BASE_URL}uploads/${formData.existingImage}`} alt="Existing" width="120" />
                         </div>
                     ) : null}
 
