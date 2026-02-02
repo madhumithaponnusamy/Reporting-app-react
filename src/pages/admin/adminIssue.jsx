@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./adminDashboard.css";
 import { IssueStatus } from "./IssueStatus";
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 
 
 export default function AdminIssues() {
@@ -12,17 +14,40 @@ export default function AdminIssues() {
   
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:5000/api/admin/issues", {
-      headers: {
-        Authorization: `Bearer ${admin_token}`
+  if (!admin_token) {
+    navigate("/admin");
+    return;
+  }
+
+  fetch(`${BASE_URL}/api/admin/issues`, {
+    headers: {
+      Authorization: `Bearer ${admin_token}`
+    }
+  })
+    .then(async res => {
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Backend error:", data);
+        setIssues([]);   
+        return;
+      }
+
+      if (Array.isArray(data)) {
+        setIssues(data);
+      } else {
+        setIssues([]);   
       }
     })
-      .then(res => res.json())
-      .then(data => setIssues(data));
-  }, []);
+    .catch(err => {
+      console.error("Fetch failed:", err);
+      setIssues([]);     
+    });
+}, []);
+
 
   const updateStatus = async (id, status) => {
-    await fetch(`http://localhost:5000/api/admin/issues/${id}/status`, {
+    await fetch(`${BASE_URL}/api/admin/issues/${id}/status`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +91,8 @@ export default function AdminIssues() {
         </thead>
 
         <tbody>
-          {issues.map(issue => (
+          {Array.isArray(issues) &&
+           issues.map(issue => (
             <IssueStatus
               key={issue.issueId}
               issue={issue}
