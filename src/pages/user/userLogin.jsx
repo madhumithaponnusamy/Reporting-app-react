@@ -1,13 +1,15 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./userLogin.css";
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-    useEffect(() => {
+  useEffect(() => {
     localStorage.removeItem("admin_token");
     localStorage.removeItem("admin_role");
   }, []);
@@ -16,7 +18,7 @@ export default function UserLogin() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,15 +37,14 @@ export default function UserLogin() {
         return;
       }
 
-  
-      localStorage.setItem("otp_email", email);
+      localStorage.setItem("user_token", result.token);
+      localStorage.setItem("user_role", result.role);
 
-  
-    navigate("/otp");
+      navigate("/user/dashboard");
 
     } catch (err) {
-      console.error("Login error full:", err);
-      alert(err.message || "Server error");
+      console.error("Login error:", err);
+      alert("Server error");
     }
   };
 
@@ -52,11 +53,13 @@ export default function UserLogin() {
       <h2>User Login</h2>
       <form onSubmit={handleLogin}>
         <input
+          type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <input
           type="password"
           placeholder="Password"
@@ -64,9 +67,12 @@ export default function UserLogin() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
         <button type="submit">Login</button>
 
-        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+        <p>
+          Don't have an account? <a href="/signup">Sign up</a>
+        </p>
       </form>
     </div>
   );
