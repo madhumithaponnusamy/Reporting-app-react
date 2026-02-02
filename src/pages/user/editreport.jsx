@@ -237,7 +237,7 @@ function EditReport() {
                     ) : formData.existingImage ? (
                         <div>
                             <p>Existing image:</p>
-                            <img src={`${BASE_URL}uploads/${formData.existingImage}`} alt="Existing" width="120" />
+                            <img src={`${BASE_URL}/uploads/${formData.existingImage}`} alt="Existing" width="120" />
                         </div>
                     ) : null}
 
